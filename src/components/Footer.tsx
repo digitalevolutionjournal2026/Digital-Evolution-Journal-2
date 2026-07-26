@@ -10,6 +10,7 @@ import {
   Database,
   Award
 } from 'lucide-react';
+import { InteractiveLogo } from './InteractiveLogo';
 
 interface FooterProps {
   onOpenGovernance: (docId?: string) => void;
@@ -33,20 +34,13 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-amber-500/30 p-1 flex items-center justify-center shrink-0">
-                <img 
-                  src="https://res.cloudinary.com/pzkb4rca/image/upload/v1785050016/ChatGPT_Image_Jul_25_2026_10_49_33_PM_ahrwiz.png"
-                  alt="Digital Evolution Journal Logo"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <InteractiveLogo size="footer" />
               <div>
                 <span className="font-serif-editorial text-2xl font-bold text-white block">
-                  Digital Evolution Journal
+                  Digital Evolution <span className="text-cyan-400 font-normal italic">Journal</span>
                 </span>
-                <span className="text-[11px] font-mono text-amber-400">
-                  Platform: Digital Evolution • ISSN 2998-4102
+                <span className="text-[11px] font-mono text-cyan-400">
+                  Platform: Digital Evolution • Gold Open Access
                 </span>
               </div>
             </div>
@@ -56,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             <div className="inline-flex items-center gap-2 bg-slate-900 border border-slate-800 p-2.5 rounded-xl">
-              <span className="text-[11px] font-mono font-bold text-emerald-400">CC BY 4.0</span>
+              <span className="text-[11px] font-mono font-bold text-cyan-400">CC BY 4.0</span>
               <span className="text-slate-400 text-[11px]">Creative Commons Attribution International</span>
             </div>
           </div>
@@ -69,19 +63,19 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2 text-slate-400 font-mono text-[11px]">
               <li>
                 <span className="text-slate-500 block">Manuscript Submissions:</span>
-                <a href="mailto:submissions@digitalevolutionjournal.com" className="text-amber-400 hover:underline">
+                <a href="mailto:submissions@digitalevolutionjournal.com" className="text-cyan-400 hover:underline">
                   submissions@digitalevolutionjournal.com
                 </a>
               </li>
               <li>
                 <span className="text-slate-500 block">Editorial / Ethics / Appeals:</span>
-                <a href="mailto:editor@digitalevolutionjournal.com" className="text-amber-400 hover:underline">
+                <a href="mailto:editor@digitalevolutionjournal.com" className="text-cyan-400 hover:underline">
                   editor@digitalevolutionjournal.com
                 </a>
               </li>
               <li>
                 <span className="text-slate-500 block">Platform & Technical Support:</span>
-                <a href="mailto:support@digitalevolutionjournal.com" className="text-amber-400 hover:underline">
+                <a href="mailto:support@digitalevolutionjournal.com" className="text-cyan-400 hover:underline">
                   support@digitalevolutionjournal.com
                 </a>
               </li>

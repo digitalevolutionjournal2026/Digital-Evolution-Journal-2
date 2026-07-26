@@ -15,6 +15,7 @@ import {
   Sparkles,
   Bookmark
 } from 'lucide-react';
+import { InteractiveLogo } from './InteractiveLogo';
 
 interface NavbarProps {
   theme?: 'dark' | 'light';
@@ -58,10 +59,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { id: 'articles', label: 'Articles' },
-    { id: 'official-docs', label: 'Handbooks & Templates' },
+    { id: 'home', label: 'Home' },
+    { id: 'articles', label: 'Articles & Archive' },
     { id: 'rri', label: 'RRI Reviewers' },
+    { id: 'journals', label: 'Journals' },
+    { id: 'conferences', label: 'Conferences' },
     { id: 'editorial', label: 'Editorial Board' },
+    { id: 'official-docs', label: 'Rules & Governance' },
   ];
 
   const scrollToSection = (id: string) => {
@@ -86,24 +90,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           
           {/* Logo & Brand */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <div className="w-9 h-9 rounded-xl bg-slate-800 p-1 border border-amber-500/30 shadow-md flex items-center justify-center shrink-0 overflow-hidden">
-              <img 
-                src="https://res.cloudinary.com/pzkb4rca/image/upload/v1785050016/ChatGPT_Image_Jul_25_2026_10_49_33_PM_ahrwiz.png"
-                alt="Digital Evolution Journal Logo"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-            </div>
+            <InteractiveLogo size="nav" />
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-serif-editorial text-lg sm:text-xl font-bold tracking-tight text-white">
-                  Digital Evolution
+                  Digital Evolution <span className="text-cyan-400 font-normal italic">Journal</span>
                 </span>
-                <span className="hidden md:inline-block text-[10px] font-mono tracking-wider text-slate-400">
-                  ISSN 2998-4102
+                <span className="hidden md:inline-block text-[10px] font-mono tracking-wider text-cyan-400/80 bg-cyan-950/60 border border-cyan-800/60 px-2 py-0.5 rounded">
+                  Gold Open Access
                 </span>
               </div>
             </div>
@@ -117,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               placeholder="Search articles, DOIs, authors..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-800/80 border border-slate-700/80 text-slate-200 text-xs rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:border-amber-500/80 focus:ring-1 focus:ring-amber-500 transition-all placeholder:text-slate-500"
+              className="w-full bg-slate-800/80 border border-slate-700/80 text-slate-200 text-xs rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder:text-slate-500"
             />
             {searchQuery && (
               <button 
@@ -137,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => scrollToSection(link.id)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                   activeSection === link.id
-                    ? 'text-amber-400 bg-slate-800'
+                    ? 'text-cyan-400 bg-slate-800/90 border border-cyan-500/20'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                 }`}
               >
@@ -154,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               aria-label="Toggle Theme"
             >
-              {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-300" />}
+              {isDarkMode ? <Sun className="w-4 h-4 text-cyan-400" /> : <Moon className="w-4 h-4 text-slate-300" />}
             </button>
 
             <button
@@ -162,7 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="hidden sm:inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium px-3 py-2 rounded-lg transition-colors cursor-pointer"
               title="Open Saved Papers & My Library"
             >
-              <Bookmark className="w-3.5 h-3.5 text-amber-400" />
+              <Bookmark className="w-3.5 h-3.5 text-cyan-400" />
               <span className="hidden md:inline">Library</span>
             </button>
 
@@ -171,15 +165,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="hidden xl:inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium px-3 py-2 rounded-lg transition-colors cursor-pointer"
               title="Open RRI Reviewer Portal"
             >
-              <Award className="w-3.5 h-3.5 text-amber-400" />
+              <Award className="w-3.5 h-3.5 text-cyan-400" />
               <span>Reviewer Portal</span>
             </button>
 
             <button
               onClick={onOpenSubmit}
-              className="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-lg transition-all shadow-sm cursor-pointer shrink-0"
+              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-lg transition-all shadow-md shadow-cyan-500/20 cursor-pointer shrink-0"
             >
-              <Upload className="w-3.5 h-3.5" />
+              <Upload className="w-3.5 h-3.5 text-slate-950" />
               <span>Submit Manuscript</span>
             </button>
 

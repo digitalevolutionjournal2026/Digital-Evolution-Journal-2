@@ -38,7 +38,7 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
   searchQuery: externalSearchQuery,
   onSelectArticle,
   onOpenSubmit,
-  onSaveArticle = () => {},
+  onSaveArticle = (_article: Article) => {},
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [localSearch, setLocalSearch] = useState<string>('');
@@ -90,8 +90,8 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-mono mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
               <span>Peer-Reviewed Gold Open Access Collection</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold font-serif-editorial text-slate-900 dark:text-white tracking-tight">
@@ -105,9 +105,9 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
 
           <button
             onClick={onOpenSubmit}
-            className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-slate-100 px-4 py-2.5 rounded-lg text-xs font-semibold transition-colors border border-slate-700 cursor-pointer self-start md:self-auto shrink-0"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 px-4 py-2.5 rounded-lg text-xs font-bold transition-all shadow-md shadow-cyan-500/20 cursor-pointer self-start md:self-auto shrink-0"
           >
-            <FileText className="w-4 h-4 text-amber-400" />
+            <FileText className="w-4 h-4 text-slate-950" />
             <span>Submit to Journal</span>
           </button>
         </div>
@@ -118,13 +118,13 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
             
             {/* Input Search Field */}
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-amber-500 absolute left-3.5 top-3" />
+              <Search className="w-4 h-4 text-cyan-500 absolute left-3.5 top-3" />
               <input
                 type="text"
                 placeholder="Real-time index search: type author name, keyword (e.g., #transformer), or DOI (e.g., 10.1038)..."
                 value={localSearch}
                 onChange={(e) => setLocalSearch(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl pl-10 pr-10 py-2 text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl pl-10 pr-10 py-2 text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50"
               />
               {localSearch && (
                 <button
@@ -157,7 +157,7 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
                     onClick={() => setIndexScope(scope.id as any)}
                     className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer font-bold ${
                       isActive
-                        ? 'bg-amber-500 text-slate-950 shadow-sm'
+                        ? 'bg-cyan-500 text-slate-950 shadow-sm'
                         : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
                     }`}
                   >
@@ -185,14 +185,14 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
                 <button
                   key={chip}
                   onClick={() => setLocalSearch(chip)}
-                  className="bg-slate-100 dark:bg-slate-700/60 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 border border-slate-200 dark:border-slate-600/60 px-2 py-0.5 rounded text-[11px] transition-colors cursor-pointer"
+                  className="bg-slate-100 dark:bg-slate-700/60 hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:text-cyan-400 border border-slate-200 dark:border-slate-600/60 px-2 py-0.5 rounded text-[11px] transition-colors cursor-pointer"
                 >
                   #{chip}
                 </button>
               ))}
             </div>
 
-            <div className="text-[11px] font-bold text-amber-600 dark:text-amber-400">
+            <div className="text-[11px] font-bold text-cyan-600 dark:text-cyan-400">
               Showing {filteredArticles.length} of {articles.length} Manuscripts
             </div>
           </div>
@@ -206,7 +206,7 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-amber-500 text-slate-950 font-bold shadow-md'
+                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
                   : 'bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
               }`}
             >
@@ -240,26 +240,26 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
               return (
                 <article
                   key={art.id}
-                  className="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 sm:p-8 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition-all shadow-sm hover:shadow-xl group"
+                  className="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all shadow-sm hover:shadow-xl group"
                 >
                   {/* Meta Header */}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3 text-xs">
                     <div className="flex flex-wrap items-center gap-2 font-mono">
-                      <span className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 px-2.5 py-0.5 rounded font-semibold">
+                      <span className="bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 px-2.5 py-0.5 rounded font-semibold">
                         {art.journalName}
                       </span>
                       <span className="text-slate-500 dark:text-slate-400">
                         Vol. {art.volume}, Issue {art.issue} ({art.year})
                       </span>
                       <span className="text-slate-400 dark:text-slate-500">•</span>
-                      <span className={`font-semibold ${matchesDoiScope ? 'text-amber-500 font-bold bg-amber-500/10 px-1 rounded' : 'text-slate-600 dark:text-slate-300'}`}>
+                      <span className={`font-semibold ${matchesDoiScope ? 'text-cyan-400 font-bold bg-cyan-500/10 px-1 rounded' : 'text-slate-600 dark:text-slate-300'}`}>
                         DOI: {art.doi}
                       </span>
                     </div>
 
                     {/* Gold OA Badge */}
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded">
-                      <CheckCircle2 className="w-3 h-3" />
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded">
+                      <CheckCircle2 className="w-3 h-3 text-cyan-400" />
                       <span>Gold OA (CC BY 4.0)</span>
                     </span>
                   </div>
@@ -267,7 +267,7 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
                   {/* Article Title */}
                   <h3 
                     onClick={() => onSelectArticle(art)}
-                    className="text-xl sm:text-2xl font-bold font-serif-editorial text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors cursor-pointer leading-snug"
+                    className="text-xl sm:text-2xl font-bold font-serif-editorial text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors cursor-pointer leading-snug"
                   >
                     {art.title}
                   </h3>
@@ -277,15 +277,15 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
                     {art.authors.map((author, idx) => {
                       const isMatchedAuthor = activeQuery && author.name.toLowerCase().includes(activeQuery);
                       return (
-                        <span key={author.id} className={`inline-flex items-center gap-1 font-medium ${isMatchedAuthor ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 px-1.5 py-0.5 rounded font-bold' : ''}`}>
+                        <span key={author.id} className={`inline-flex items-center gap-1 font-medium ${isMatchedAuthor ? 'bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 px-1.5 py-0.5 rounded font-bold' : ''}`}>
                           <span>{author.name}</span>
                           {author.orcid && (
-                            <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1 rounded" title={`ORCID: ${author.orcid}`}>
+                            <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 px-1 rounded" title={`ORCID: ${author.orcid}`}>
                               iD
                             </span>
                           )}
                           {author.isCorresponding && (
-                            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold" title="Corresponding Author">
+                            <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold" title="Corresponding Author">
                               *
                             </span>
                           )}
@@ -323,8 +323,8 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
                       )}
 
                       {/* RRI Rating Pill */}
-                      <span className="inline-flex items-center gap-1 text-[11px] bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded font-semibold">
-                        <Award className="w-3 h-3 text-amber-500" />
+                      <span className="inline-flex items-center gap-1 text-[11px] bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded font-semibold">
+                        <Award className="w-3 h-3 text-cyan-400" />
                         <span>RRI Peer Rating: {art.rriScore}/5.0</span>
                       </span>
 
@@ -335,7 +335,7 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
                           return (
                             <span 
                               key={kw} 
-                              className={`px-2 py-0.5 rounded ${isKwMatched ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-100 dark:bg-slate-800'}`}
+                              className={`px-2 py-0.5 rounded ${isKwMatched ? 'bg-cyan-500 text-slate-950 font-bold' : 'bg-slate-100 dark:bg-slate-800'}`}
                             >
                               #{kw}
                             </span>
@@ -354,7 +354,7 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
                           e.stopPropagation();
                           onSaveArticle(art);
                         }}
-                        className="p-1.5 text-slate-400 hover:text-amber-500 hover:bg-amber-500/10 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+                        className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
                         title="Save paper to My Library"
                       >
                         <Bookmark className="w-4 h-4" />
@@ -362,9 +362,9 @@ export const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({
 
                       <button
                         onClick={() => onSelectArticle(art)}
-                        className="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer shadow-sm"
+                        className="inline-flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold px-3.5 py-1.5 rounded-lg text-xs transition-all cursor-pointer shadow-sm shadow-cyan-500/20"
                       >
-                        <Eye className="w-3.5 h-3.5" />
+                        <Eye className="w-3.5 h-3.5 text-slate-950" />
                         <span>Read Full Article</span>
                       </button>
                     </div>

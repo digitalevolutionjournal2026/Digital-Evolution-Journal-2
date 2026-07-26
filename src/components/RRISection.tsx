@@ -64,14 +64,14 @@ export const RRISection: React.FC<RRISectionProps> = ({
     <section id="rri" className="py-20 bg-slate-900 text-slate-100 border-b border-slate-800 relative overflow-hidden">
       
       {/* Background glow */}
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-amber-500/10 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-96 h-96 bg-cyan-500/10 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-          <div className="inline-flex items-center gap-1.5 bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider font-mono">
-            <Award className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider font-mono">
+            <Award className="w-3.5 h-3.5 text-cyan-400" />
             <span>Digital Evolution Differentiator</span>
           </div>
 
@@ -87,7 +87,7 @@ export const RRISection: React.FC<RRISectionProps> = ({
         {/* 3 Pillars of RRI */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <div className="bg-slate-800/60 border border-slate-700/80 p-6 rounded-2xl space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg">
+            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-lg border border-cyan-500/30">
               01
             </div>
             <h3 className="text-lg font-bold text-white font-serif-editorial">

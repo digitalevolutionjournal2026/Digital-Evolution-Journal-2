@@ -25,8 +25,8 @@ export const StatsBar: React.FC = () => {
                 key={idx}
                 className="flex items-center gap-3 pt-3 md:pt-0 md:px-4 first:pt-0 first:px-0"
               >
-                <div className="p-2 rounded-lg bg-slate-900 text-amber-400 shrink-0 border border-slate-800">
-                  <Icon className="w-4 h-4" />
+                <div className="p-2 rounded-lg bg-slate-900 text-cyan-400 shrink-0 border border-slate-800 shadow-sm shadow-cyan-500/10">
+                  <Icon className="w-4 h-4 text-cyan-400" />
                 </div>
                 <div>
                   <div className="text-xl font-bold font-serif-editorial text-white tracking-tight">

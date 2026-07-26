@@ -18,7 +18,7 @@ interface SaveToLibraryModalProps {
 export const SaveToLibraryModal: React.FC<SaveToLibraryModalProps> = ({
   article,
   onClose,
-  onSavedSuccess = () => {},
+  onSavedSuccess = (_folderName: string) => {},
 }) => {
   const [folders, setFolders] = useState<SavedArticleFolder[]>([]);
   const [selectedFolderId, setSelectedFolderId] = useState<string>('fld-favorites');

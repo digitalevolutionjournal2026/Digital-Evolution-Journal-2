@@ -26,6 +26,8 @@ import { MyLibraryModal } from './components/MyLibraryModal';
 import { SaveToLibraryModal } from './components/SaveToLibraryModal';
 
 import { OfficialDocsSection } from './components/OfficialDocsSection';
+import { LandingWorkflowSection } from './components/LandingWorkflowSection';
+import { ArrowLeft, Home } from 'lucide-react';
 
 import { FEATURED_ARTICLES } from './data/journalData';
 import { Article } from './types';
@@ -58,9 +60,14 @@ export default function App() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const [activeSection, setActiveSection] = useState<string>('hero');
+  const [activeSection, setActiveSection] = useState<string>('home');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+
+  const handleNavigateToView = (view: string) => {
+    setActiveSection(view);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   
   // Modal states
   const [submitModalOpen, setSubmitModalOpen] = useState<boolean>(false);
@@ -138,57 +145,96 @@ export default function App() {
       {/* Main Page Layout */}
       <main className="flex-1">
         
-        {/* Hero Banner */}
-        <Hero
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          onOpenSubmit={() => setSubmitModalOpen(true)}
-          onScrollToArticles={() => scrollToSection('articles')}
-          onScrollToRRI={() => scrollToSection('rri')}
-          onOpenGovernance={handleOpenGovernance}
-          onSelectArticle={(art) => setSelectedArticle(art)}
-        />
+        {/* LANDING PAGE VIEW (Clean & Minimal Data) */}
+        {(activeSection === 'home' || activeSection === 'hero') && (
+          <>
+            {/* Hero Banner */}
+            <Hero
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              onOpenSubmit={() => setSubmitModalOpen(true)}
+              onScrollToArticles={() => handleNavigateToView('articles')}
+              onScrollToRRI={() => handleNavigateToView('rri')}
+              onOpenGovernance={handleOpenGovernance}
+              onSelectArticle={(art) => setSelectedArticle(art)}
+            />
 
-        {/* Live Metrics Stats Bar */}
-        <StatsBar />
+            {/* Live Metrics Stats Bar */}
+            <StatsBar />
 
-        {/* Official Guidelines & Handbooks Download Section */}
-        <OfficialDocsSection onOpenGovernance={handleOpenGovernance} />
+            {/* Core Workflow: How to Join, How to Submit, How to Review, How Indexing Works & ORCID, Rules & Docs */}
+            <LandingWorkflowSection
+              onOpenSubmit={() => setSubmitModalOpen(true)}
+              onOpenGovernance={handleOpenGovernance}
+              onOpenAuth={handleOpenAuth}
+              onNavigateToView={handleNavigateToView}
+            />
+          </>
+        )}
 
-        {/* Featured Articles Collection */}
-        <FeaturedArticles
-          articles={FEATURED_ARTICLES}
-          searchQuery={searchQuery}
-          onSelectArticle={(art) => setSelectedArticle(art)}
-          onOpenSubmit={() => setSubmitModalOpen(true)}
-          onSaveArticle={(art) => setArticleToSave(art)}
-        />
+        {/* SEPARATE PAGE VIEWS */}
+        {activeSection !== 'home' && activeSection !== 'hero' && (
+          <div className="py-6">
+            
+            {/* Subnav Back Bar */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigateToView('home')}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 hover:text-white hover:bg-slate-800 text-xs font-mono font-bold transition-all cursor-pointer shadow-md"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>← Back to Landing Page</span>
+              </button>
+            </div>
 
-        {/* Reviewer Reputation Index (RRI) Engine */}
-        <RRISection
-          onOpenGovernance={handleOpenGovernance}
-          onOpenAuth={handleOpenAuth}
-          onOpenReviewerDashboard={() => setReviewerDashboardOpen(true)}
-        />
+            {/* Dedicated Page View Components */}
+            {activeSection === 'articles' && (
+              <FeaturedArticles
+                articles={FEATURED_ARTICLES}
+                searchQuery={searchQuery}
+                onSelectArticle={(art) => setSelectedArticle(art)}
+                onOpenSubmit={() => setSubmitModalOpen(true)}
+                onSaveArticle={(art) => setArticleToSave(art)}
+              />
+            )}
 
-        {/* Specialized Journals Directory */}
-        <JournalsSection
-          onOpenSubmit={() => setSubmitModalOpen(true)}
-        />
+            {activeSection === 'rri' && (
+              <RRISection
+                onOpenGovernance={handleOpenGovernance}
+                onOpenAuth={handleOpenAuth}
+                onOpenReviewerDashboard={() => setReviewerDashboardOpen(true)}
+              />
+            )}
 
-        {/* Conferences & Proceedings */}
-        <ConferencesSection
-          onOpenSubmit={() => setSubmitModalOpen(true)}
-        />
+            {activeSection === 'journals' && (
+              <JournalsSection
+                onOpenSubmit={() => setSubmitModalOpen(true)}
+              />
+            )}
 
-        {/* Editorial Board & Governance */}
-        <EditorialBoardSection />
+            {activeSection === 'conferences' && (
+              <ConferencesSection
+                onOpenSubmit={() => setSubmitModalOpen(true)}
+              />
+            )}
 
-        {/* Open Access Memberships & Supporter Tiers */}
-        <PricingSection
-          onOpenAuth={handleOpenAuth}
-          onOpenGovernance={handleOpenGovernance}
-        />
+            {activeSection === 'editorial' && (
+              <EditorialBoardSection />
+            )}
+
+            {activeSection === 'official-docs' && (
+              <OfficialDocsSection onOpenGovernance={handleOpenGovernance} />
+            )}
+
+            {activeSection === 'pricing' && (
+              <PricingSection
+                onOpenAuth={handleOpenAuth}
+                onOpenGovernance={handleOpenGovernance}
+              />
+            )}
+
+          </div>
+        )}
 
       </main>
 
