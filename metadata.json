@@ -1,0 +1,6 @@
+{
+  "name": "Digital Evolution Journal",
+  "description": "Production-grade Gold Open Access academic publishing platform featuring the Reviewer Reputation Index (RRI), open access journals, proceedings, and citable peer review credentials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
